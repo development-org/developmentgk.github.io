@@ -5,9 +5,15 @@
   "private": true,
   "dependencies": {
     "autoprefixer": "^7.1.6",
+    "axios": "^0.21.1",
+    "google-spreadsheet": "^3.1.15",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
-    "react-scripts": "^1.1.5"
+    "react-google-login": "^5.2.2",
+    "react-loader-spinner": "^4.0.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^1.1.5",
+    "tabletop": "^1.6.3"
   },
   "scripts": {
     "start": "react-scripts start",

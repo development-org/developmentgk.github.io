@@ -1,28 +1,25 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Logintbygoogle from './Logintbygoogle'
+import Dashboard from "./Dashboard";
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <p>Hello World</p>
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className="App">
+                <Router>
+                    <div className="container">
+                        <Switch>
+                            <Route exact path='/' component={Logintbygoogle} ></Route>
+                            <Route path='/Dashboard' component={Dashboard} ></Route>
+                        </Switch>
+                    </div>
+                </Router>
+            </div>
+        );
+    }
 }
 
 export default App;
