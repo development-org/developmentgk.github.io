@@ -15,20 +15,16 @@ import './App.css';
 
 const App = () => {
   return (
-    <div className='App'>
-      <Router>
-        <div className='container'>
-          <Switch>
-            <Route exact path='/'>
-              <Redirect to='/login' />
-            </Route>
-            <Route path='/Dashboard' component={Dashboard}></Route>
-            <Route path='/signup' component={Signup}></Route>
-            <Route path='/login' component={Login}></Route>
-          </Switch>
-        </div>
-      </Router>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path='/'>
+          <Redirect to='/login' />
+        </Route>
+        <Route path='/Dashboard' component={Dashboard}></Route>
+        <Route path='/signup' component={Signup}></Route>
+        <Route path='/login' component={Login}></Route>
+      </Switch>
+    </Router>
   );
 };
 
