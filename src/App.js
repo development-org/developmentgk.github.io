@@ -1,25 +1,35 @@
-import React, { Component } from 'react';
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
+
+import Dashboard from './components/Dashboard';
+import Signup from './components/Signup';
+import Login from './components/Login';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import Logintbygoogle from './Logintbygoogle'
-import Dashboard from "./Dashboard";
-import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
-
-class App extends Component {
-    render() {
-        return (
-            <div className="App">
-                <Router>
-                    <div className="container">
-                        <Switch>
-                            <Route exact path='/' component={Logintbygoogle} ></Route>
-                            <Route path='/Dashboard' component={Dashboard} ></Route>
-                        </Switch>
-                    </div>
-                </Router>
-            </div>
-        );
-    }
-}
+const App = () => {
+  return (
+    <div className='App'>
+      <Router>
+        <div className='container'>
+          <Switch>
+            <Route exact path='/'>
+              <Redirect to='/login' />
+            </Route>
+            <Route path='/Dashboard' component={Dashboard}></Route>
+            <Route path='/signup' component={Signup}></Route>
+            <Route path='/login' component={Login}></Route>
+          </Switch>
+        </div>
+      </Router>
+    </div>
+  );
+};
 
 export default App;
