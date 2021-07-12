@@ -14,6 +14,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const signup = (email, password) => {
     return auth.createUserWithEmailAndPassword(email, password);
@@ -24,12 +25,13 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    return auth.logout();
+    return auth.signOut();
   };
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
+      setLoading(false);
     });
 
     return unsubscribe;
@@ -42,7 +44,11 @@ export const AuthProvider = ({ children }) => {
     logout,
   };
 
-  return <AuthContext.Provider value={ctx}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={ctx}>
+      {!loading && children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthContext;
