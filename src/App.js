@@ -13,6 +13,7 @@ import { AuthProvider } from './contexts/auth-context';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import PrivateRoute from './components/PrivateRoute';
 
 const App = () => {
   return (
@@ -22,7 +23,7 @@ const App = () => {
           <Route exact path='/'>
             <Redirect to='/login' />
           </Route>
-          <Route path='/Dashboard' component={Dashboard}></Route>
+          <PrivateRoute path='/Dashboard' component={Dashboard}></PrivateRoute>
           <Route path='/signup' component={Signup}></Route>
           <Route path='/login' component={Login}></Route>
         </Switch>
