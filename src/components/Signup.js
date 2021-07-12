@@ -1,15 +1,19 @@
 import React, { useState, useRef } from 'react';
-import { Card, Form, Button, Container } from 'react-bootstrap';
+import { Card, Form, Button, Container, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/auth-context';
 
 const Signup = () => {
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const emailRef = useRef('');
   const passwordRef = useRef('');
   const confirmPasswordRef = useRef('');
 
-  const handleSubmit = (e) => {
+  const { signup } = useAuth();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
@@ -19,7 +23,15 @@ const Signup = () => {
       setError('Passwords do not match');
       return;
     }
-    console.log({ email, password });
+
+    try {
+      setError('');
+      setLoading(true);
+      await signup(email, password);
+    } catch (error) {
+      setError('Failed to create an account!');
+    }
+    setLoading(false);
   };
 
   return (
@@ -31,6 +43,11 @@ const Signup = () => {
         <Card>
           <Card.Body>
             <h2 className='text-center mb-4'>Signup</h2>
+            {error && (
+              <Alert variant='danger' transition={true}>
+                {error}
+              </Alert>
+            )}
             <Form onSubmit={handleSubmit}>
               <Form.Group className='mb-3' controlId='email'>
                 <Form.Label>Email address</Form.Label>
@@ -62,7 +79,12 @@ const Signup = () => {
                 />
               </Form.Group>
 
-              <Button variant='primary' type='submit' className='w-100'>
+              <Button
+                disabled={loading}
+                variant='primary'
+                type='submit'
+                className='w-100'
+              >
                 Signup
               </Button>
             </Form>
