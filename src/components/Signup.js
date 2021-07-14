@@ -11,7 +11,7 @@ const Signup = () => {
   const passwordRef = useRef('');
   const confirmPasswordRef = useRef('');
 
-  const { signup } = useAuth();
+  const { signup, signInWithGoogle } = useAuth();
   const history = useHistory();
 
   const handleSubmit = async (e) => {
@@ -34,6 +34,15 @@ const Signup = () => {
       setError('Failed to create an account!');
     }
     setLoading(false);
+  };
+
+  const googleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      history.push('/dashboard');
+    } catch (error) {
+      setError('Google sign in failed!');
+    }
   };
 
   return (
@@ -88,6 +97,15 @@ const Signup = () => {
                 className='w-100'
               >
                 Signup
+              </Button>
+
+              <Button
+                disabled={loading}
+                variant='danger'
+                className='w-100 mt-3'
+                onClick={googleSignIn}
+              >
+                Sign up with Google
               </Button>
             </Form>
           </Card.Body>

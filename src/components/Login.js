@@ -9,7 +9,7 @@ const Login = () => {
   const emailRef = useRef('');
   const passwordRef = useRef('');
 
-  const { login } = useAuth();
+  const { login, signInWithGoogle } = useAuth();
   const history = useHistory();
 
   const handleSubmit = async (e) => {
@@ -23,6 +23,15 @@ const Login = () => {
       history.push('/dashboard');
     } catch (error) {
       setError('Login failed, Invalid credentials!');
+    }
+  };
+
+  const googleSignIn = async () => {
+    try {
+      const res = await signInWithGoogle();
+      history.push('/dashboard');
+    } catch (error) {
+      setError('Google login authentication failed!');
     }
   };
 
@@ -63,6 +72,14 @@ const Login = () => {
 
               <Button variant='primary' type='submit' className='w-100'>
                 Login
+              </Button>
+
+              <Button
+                variant='danger'
+                className='w-100 mt-3'
+                onClick={googleSignIn}
+              >
+                Log in with Google
               </Button>
             </Form>
           </Card.Body>
