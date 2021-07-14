@@ -28,7 +28,7 @@ const Login = () => {
 
   const googleSignIn = async () => {
     try {
-      const res = await signInWithGoogle();
+      await signInWithGoogle();
       history.push('/dashboard');
     } catch (error) {
       setError('Google login authentication failed!');
